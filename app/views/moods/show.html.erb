@@ -1,0 +1,18 @@
+<p>
+  <b>Name:</b>
+  <%= @mood.name %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @mood.description %>
+</p>
+
+<p>
+  <b>Mood picture:</b>
+  <%= image_tag @mood.mood_picture %>
+</p>
+
+
+<%= link_to 'Edit', edit_mood_path(@mood) %> |
+<%= link_to 'Back', moods_path %>

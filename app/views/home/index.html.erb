@@ -1,0 +1,53 @@
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+
+<span class="span12">
+  <%= link_to "Select Mood", moods_for_selection_path, remote:true, class:"btn btn-primary" %>
+</span>
+
+
+<div id="container" style="min-width: 400px; height: 400px; margin: 0 auto"></div>
+
+
+
+
+<select name="profile[city1]" id="city1_select">
+  <option value="">Select City</option>
+  <option value="0">Wardha</option>
+  <option value="3988">Nagpur</option>
+  <option value="3999">Pune</option>
+  <option value="3987">Mumbai</option>
+  <option value="Akola">Akola</option>
+  <option value="Amravati">Amravati</option>
+</select> And
+
+<select name="profile[city2]" id="city2_select">
+  <option value="">Select City</option>
+  <option value="Wardha">Wardha</option>
+  <option value="Nagpur">Nagpur</option>
+  <option value="Pune">Pune</option>
+  <option value="Mumbai">Mumbai</option>
+  <option value="Akola">Akola</option>
+  <option value="Amravati">Amravati</option>
+</select>
+
+
+
+<script>
+  $(function($) {
+    $("#city1_select").change(function() {
+      var city1 = $('select#city1_select :selected').val();
+      if(city1 == "") city1 = "select city";
+      $.ajax({url: '/home/city_for_graph/'+ city1,
+        data: "Success",
+        success: function(data){
+          $("#container").html(data);
+        }
+      })
+      // jQuery.get('/home/city_for_graph/'+ city, function(data){
+      // $("#chart_div").html(data);
+      // })
+    });
+  });
+</script>

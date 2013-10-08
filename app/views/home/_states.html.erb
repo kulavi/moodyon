@@ -1,0 +1,29 @@
+<%= simple_form_for :profile, :method => :get do |f| %>
+  <div class="control-group">
+    <label class="control-label" for="inputState">State</label>
+    <div class="controls"> 
+      <% if !states.blank? %>
+      	<%= f.input_field :state_id, :collection=>states.collect{ |s| [s.name,s.id]} %>
+      <% else %>
+	<%= f.input_field :state_id, :collection=>[] %>
+      <% end %>
+    </div>
+   </div>
+<% end %>   
+      
+    
+    
+<script type="text/javascript">
+jQuery(function($) {
+// when the #region_id field changes
+  $("#profile_state_id").change(function() {
+    // make a POST call and replace the content
+    var state = $('select#profile_state_id :selected').val();
+    if(state == "") state="0";
+    jQuery.get('/home/update_city_select/'+state, function(data){
+        $("#addressCities").html(data);
+    })
+    return false;
+  });
+})
+</script>

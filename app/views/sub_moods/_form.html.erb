@@ -1,0 +1,14 @@
+<%= simple_form_for(@sub_mood) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :mood %>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :sub_mood_picture, :label => 'upload_picture', :required => true %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

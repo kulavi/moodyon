@@ -1,0 +1,31 @@
+<h1>Listing Sub-moods</h1>
+
+<table>
+  <tr>
+    <th>Mood</th>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Sub mood picture</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @sub_moods.each do |sub_mood| %>
+  <tr>
+    <td><%= sub_mood.mood.name %></td>
+    <td><%= sub_mood.name %></td>
+    <td><%= sub_mood.description %></td>
+    <td><%= image_tag sub_mood.sub_mood_picture %></td>
+    <% if current_user.has_role? :admin %>
+    <td><%= link_to 'Show', sub_mood, class: "btn btn-mini" %></td>
+    <td><%= link_to 'Edit', edit_sub_mood_path(sub_mood), class: "btn btn-mini" %></td>
+    <td><%= link_to 'Destroy', sub_mood, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini" %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Sub mood', new_sub_mood_path if current_user.has_role? :admin %>

@@ -1,0 +1,37 @@
+<!-- <h3>Your Profile</h3> -->
+
+<!-- <p>User: <%= @user.name %></p>
+<p>Email: <%= @user.email if @user.email %></p> -->
+
+<div class="row">
+  <aside class="span4">
+    <section>
+      <% if current_user.has_role? :user %>
+    	<% if @user.profile.profile_picture.present? %>
+    		<%= link_to (image_tag @user.profile.profile_picture, :alt => "Profile Picture", :width => 110, :height => 110, :title => "Change?"), new_profile_path %>
+        <% else %>
+    		<%= link_to image_tag('/images/default_profile_image.png', :alt => "Profile Picture", :width => 110, :height => 110, :title => "change?").to_s, new_profile_path %>
+    	<% end %>
+      <div class="row">
+      	<aside class="span4">
+       <%= link_to @user.name %><br />
+      Email : <%= @user.email %><br />
+      Temporary Address :  <%= @user.profile.present? ? @user.profile.address_line_1 : "" %><br />
+      Permanent Address :  <%= @user.profile.address_line_2 %><br />
+      Gender : 	<%= @user.profile.present? ? @user.profile.gender : "" %><br />
+      Date of Birth : <%= @user.profile.present? ? @user.profile.date_of_birth : "" %><br />
+      Marital Status : <%= @user.profile.present? ? @user.profile.marital_status : "" %><br />
+      City : <%= @user.profile.city.present? ? @user.profile.city.name : ""  %><br />
+      State : <%= @user.profile.state.present? ? @user.profile.state.name : ""  %><br />
+      Country : <%= @user.profile.country.present? ? @user.profile.country.name : "" %><br />
+      Pincode : <%= @user.profile.present? ? @user.profile.pincode : "" %><br />
+      Mobile No. : <%= @user.profile.present? ? @user.profile.mobile_no : "" %><br />
+      Organisation : <%= @user.profile.present? ? @user.profile.org_name : "" %><br />
+      Designation : <%= @user.profile.present? ? @user.profile.designation : "" %><br />
+      Profession : <%= @user.profile.present? ? @user.profile.profession : "" %><br />
+      </div>
+      <% end %>
+    </section> 
+  </aside>
+</div>
+

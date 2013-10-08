@@ -1,0 +1,71 @@
+
+<script>
+$(document).ready(function(){
+	var chart;
+	var city1 = $('select#city1_select :selected').val();
+        var city2 = $('select#city2_select :selected').val();
+    $(document).ready(function() {
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+                marginRight: 130,
+                marginBottom: 25
+            },
+            title: {
+                text: 'Average Moods of ' + city1 + ' and ' + city2,
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Source: MoodyOn.com',
+                x: -20
+            },
+            xAxis: {
+                categories: [<% moods.uniq.each do |mood| %>
+				'<%= mood %>', <%#= moods.last ? "," : "" %>
+				<% end %>
+				
+			    ]
+            },
+            yAxis: {
+                title: {
+                    text: 'Users count in number'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                formatter: function() {
+                        return '<b>'+ this.series.name +'</b><br/>'+
+                        this.x +': '+ this.y;
+                }
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'top',
+                x: -10,
+                y: 100,
+                borderWidth: 0
+            },
+            series: [{
+                name: city1,
+                data: [<%= users.sort.count{|x| x.sub_mood.mood.name == 'Glad'} %>, <%= users.sort.count{|x| x.sub_mood.mood.name == 'Mad'} %>, <%= users.sort.count{|x| x.sub_mood.mood.name == 'Normal'} %>, <%= users.sort.count{|x| x.sub_mood.mood.name == 'Sad'} %> ]
+            }, {
+                name: city2,
+                data: [<%= users.sort.count{|x| x.sub_mood.mood.name == 'Glad'} %>, <%= users.sort.count{|x| x.sub_mood.mood.name == 'Mad'} %>, <%= users.sort.count{|x| x.sub_mood.mood.name == 'Normal'} %>, <%= users.sort.count{|x| x.sub_mood.mood.name == 'Sad'} %>]
+            }]
+        });
+    });
+    
+});
+</script>
+
+
+
+
+
+

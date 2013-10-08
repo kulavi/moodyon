@@ -1,0 +1,40 @@
+<% if current_user.present? %>
+  <div class="tabbable tabs-right">
+    <ul class="nav nav-tabs">
+      <%= render :partial => "home/show_profile_menu" %>
+    </ul>
+    <div class="tab-content">
+      <div class="tab-pane active" id="tab1">
+	<% if @profile.present? %>
+	  <%= simple_form_for(@profile, :url => {:action => "profile", :controller => "home"}, :html => {:class=>"form-horizontal", :multipart => true}) do |f| %>
+	    <fieldset>
+	      <%= render :partial => "home/profile_form", :locals => {:f => f} %>
+	      <div class="control-group">
+		<div class="controls">
+		  <%= f.button :submit, "Save Profile", {:class => "btn btn-large btn-primary"} %>
+		</div>
+	      </div>
+	    </fieldset>
+	  <% end %>
+	<% end %>
+      </div>
+      <div class="tab-pane" id="tab2">
+	<p>Howdy, I'm in Section 2.</p>
+      </div>
+      <div class="tab-pane" id="tab3">
+	<p>Howdy, I'm in Section 3.</p>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+
+<script>
+$(function(){
+    $('#dp5').datepicker({ format: 'yyyy-mm-dd'  }); 
+})
+</script>
+
+
+
+

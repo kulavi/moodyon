@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= content_for?(:title) ? yield(:title) : "MoodyOn.com" %></title>
+    <meta name="description" content="<%= content_for?(:description) ? yield(:description) : "MoodyOn.com" %>">
+    <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= yield(:head) %>
+  </head>
+  <body class="<%= controller_name %> <%= action_name %>">
+    <header class="navbar navbar-fixed-top">
+      <nav class="navbar-inner">
+        <div class="container">
+          <%= render 'layouts/navigation' %>
+        </div>
+      </nav>
+    </header>
+    <div id="main" role="main">
+      <div class="container">
+        <div class="content">
+           <div class="row">
+            <div class="span12">
+              <%= render 'layouts/messages' %>
+              <%= yield %>
+            </div>
+          </div>
+      	  <footer class="navbar navbar-fixed-bottom">
+      	    <nav class="navbar-inner">
+      	      <div class="container">
+                	<%= link_to "About Us", about_path %> | 
+                	<%= link_to "Blog", blog_path %> | 
+                	<%= link_to "Developers", developers_path %> | 
+                	<%= link_to "Jobs", jobs_path %> | 
+                	<%= link_to "Privacy", privacy_path %> | 
+                	<%= link_to "Terms", terms_path %> | 
+                	<%= link_to "Contact Us", contact_path %> | 
+                	<%= link_to "Help", help_path %> | 
+                  <div id="copyright" style="float:right;">
+                    moodyon.com &copy; 2012 [BluePlanet Infosolutions Pvt. Ltd.]
+                  </div>
+      	      </div>
+            </nav>
+          </footer>
+        </div>
+      </div> <!--! end of .container -->
+    </div> <!--! end of #main -->
+  </body>
+</html>
+
+
+
+
+
+

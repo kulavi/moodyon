@@ -1,0 +1,32 @@
+<% if user_signed_in? %>
+  <a type="text" style="width:100%;" href="#<%= mood.name %>" data-toggle="modal"><%= image_tag(mood.sub_mood_picture, title: mood.name) %></a>
+  <div class="modal fade" id="<%= mood.name %>">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3>You are now in <%= mood.name %> mood</h3>
+      <p><%= image_tag(mood.sub_mood_picture, title: mood.name) %></p>
+    </div>
+    <%= simple_form_for :user_sub_mood, :url => {:action => "enter_sub_mood", :controller => "home"}, :html => {class:"form-horizontal", :multipart => true} do |f| %>
+    <div class="modal-body">
+      <div class="control-group">
+	<label class="control-label" for="inputReason">Select a reason</label>
+	<div class="controls"> 	
+	  <%= f.input_field :reason_id, :collection=> Reason.find(:all, :order=>:name).collect{ |c| [c.name,c.id]}, :input_html => { :class => 'input-large' } %>
+	</div>
+      </div> 
+      <div class="control-group">
+	<label class="control-label" for="inputReason">Select a event</label>
+	<div class="controls">	
+	  <%= f.input_field :event_id, :collection=> Event.find(:all, :order=>:name).collect{ |c| [c.name,c.id]}, :input_html => { :class => 'input-large' } %>
+	</div>
+      </div>
+      <%= f.hidden_field :sub_mood_id, :value => mood.id %>
+    </div>
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal">Close</a>
+      <%= f.submit "Submit", :class => "btn btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+<% end %>
+

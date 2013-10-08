@@ -1,0 +1,50 @@
+<div class="tabbable"> <!-- Only required for left/right tabs -->
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab1" data-toggle="tab">Glad</a></li>
+    <li><a href="#tab2" data-toggle="tab">Mad</a></li>
+    <li><a href="#tab3" data-toggle="tab">Normal</a></li>
+    <li><a href="#tab4" data-toggle="tab">Sad</a></li>
+  </ul>
+  <h3>
+    <%= "What is your mood today?" if current_user.has_role? :user %>
+    <%= "Listing Moods" if current_user.has_role? :admin %>  
+  </h3>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab1">
+      <% @moods[0].sub_moods.each do |mood| %>
+	 <%= render :partial => "sub_mood_select", :locals => {:mood => mood} %> 
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab2">
+      <% @moods[1].sub_moods.each do |mood| %>
+	 <%= link_to image_tag(mood.sub_mood_picture, title: mood.name) %> 
+      <% end %>
+    </div>
+     <div class="tab-pane" id="tab3">
+      <% @moods[2].sub_moods.each do |mood| %>
+	 <%= link_to image_tag(mood.sub_mood_picture, title: mood.name) %> 
+      <% end %>
+    </div>
+    <div class="tab-pane" id="tab4">
+     <% @moods[3].sub_moods.each do |mood| %>
+      <%= link_to image_tag(mood.sub_mood_picture, title: mood.name) %> 
+     <% end %>
+    </div>
+  </div>
+  <% if current_user.has_role? :admin %>
+    <%= link_to 'New Mood', new_mood_path, :class => "btn btn-primary"   %>
+  <% end %>
+    <%#= link_to "Click here to Complete Your Profile", new_profile_path if check_profile(current_user) %>
+    <%#= link_to "View Your Profile", new_profile_path if !check_profile(current_user) %>
+<%#= debug !check_profile(current_user) %>
+<%#= debug check_profile(current_user) %>
+</div>
+
+
+
+
+
+
+
+
+

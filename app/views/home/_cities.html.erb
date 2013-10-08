@@ -1,0 +1,13 @@
+<%= simple_form_for :profile do |f| %>
+  <div class="control-group">
+    <label class="control-label" for="inputCity">City</label>
+      <div class="controls"> 
+	<% if !cities.blank? %>
+	<%#= debug f.input_field :city_id, :collection=>cities.collect{ |c| [c.name,c.id]} %>
+	  <%= f.input_field :city_id, :collection=>cities.collect{ |c| [c.name,c.id]} %>
+	<% else %>
+	  <%= f.input_field :city_id, :collection=>[] %>
+	<% end %>
+      </div>
+   </div>
+<% end %> 

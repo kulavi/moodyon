@@ -1,0 +1,27 @@
+<h1>Listing moods</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+    <th>Mood picture</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @moods.each do |mood| %>
+  <tr>
+    <td><%= mood.name %></td>
+    <td><%= mood.description %></td>
+    <td><%= image_tag mood.mood_picture %></td>
+    <% if current_user.has_role? :admin %>
+    <td><%= link_to 'Show', mood, class: "btn btn-mini" %></td>
+    <td><%= link_to 'Edit', edit_mood_path(mood), class: "btn btn-mini" %></td>
+    <td><%= link_to 'Destroy', mood, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-mini" %></td>
+    <% end %>
+  </tr>
+<% end %>
+</table>
+
+

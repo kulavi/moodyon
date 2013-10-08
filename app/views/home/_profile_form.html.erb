@@ -1,0 +1,130 @@
+<!-- <%= label_tag :name %> -->
+
+  <span class="label label-info">Edit your profile information</span>
+  <div class="control-group">
+    <label class="control-label" for="inputEmail">Upload Picture</label>
+      <div class="controls">
+	<%= f.input_field :profile_picture %>
+    </div>
+  </div>
+   
+  <div class="control-group">
+    <label class="control-label" for="inputFirstName">First Name</label>
+    <div class="controls">      
+      <%= f.input_field :fname, :placeholder => "First Name", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputLastName">Last Name</label>
+    <div class="controls">      
+      <%= f.input_field :lname, :placeholder => "Last Name", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div> 
+  
+  <div class="control-group">
+    <label class="control-label" for="inputAddressLine1">Address Line 1</label>
+    <div class="controls">      
+      <%= f.text_area :address_line_1, :rows => 3, :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputAddressLine2">Address Line 2</label>
+    <div class="controls">      
+      <%= f.text_area :address_line_2, :rows => 3, :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+  
+  <div class="control-group">
+    <label class="control-label" for="inputGender">Gender</label>
+    <div class="controls"> 
+      <%= f.input_field :gender, :as => :select, :collection => @gender.map { |a| [ a ] } %>
+    </div>
+  </div> 
+  
+  <div class="control-group">
+    <label class="control-label" for="inputDateOfBirth">Date of Birth</label>
+    <div class="controls"> 
+      <%= f.text_field :date_of_birth, :value=>current_user.profile.date_of_birth.present? ? current_user.profile.date_of_birth : Date.today.strftime('%Y-%m-%d'), :id =>"dp5" %>
+    </div>
+  </div> 
+
+  <div class="control-group">
+    <label class="control-label" for="inputGender">Relationship Status</label>
+    <div class="controls"> 
+      <%= f.input_field :marital_status, :as => :select, :collection => @marital_status.map { |a| [ a ] } %>
+    </div>
+  </div> 
+ 
+   <div class="control-group">
+    <label class="control-label" for="inputCountry">Country</label>
+    <div class="controls"> 
+      <%= f.input_field :country_id, :collection=> Country.find(:all, :order=>:name).collect{ |c| [c.name,c.id]} %>
+    </div>
+   </div>
+    
+    <div id="addressStates">
+      <%= render :partial => 'states' %>
+    </div>
+    
+    <div id="addressCities">
+      <%= render :partial => 'cities' %>
+    </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputPincode">Pincode</label>
+    <div class="controls">      
+      <%= f.input_field :pincode, :placeholder => "Pincode", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputMobileNo">Mobile</label>
+    <div class="controls">      
+      <%= f.input_field :mobile_no, :placeholder => "Phone Number", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputOrgName">Organisation</label>
+    <div class="controls">      
+      <%= f.input_field :org_name, :placeholder => "Organisation", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputdesignation">Designation</label>
+    <div class="controls">      
+      <%= f.input_field :designation, :placeholder => "Designation", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label" for="inputdesignation">Profession</label>
+    <div class="controls">      
+      <%= f.input_field :profession, :placeholder => "Profession", :input_html => { :class => 'input-large' } %>
+    </div>
+  </div>
+  
+
+  
+<script>
+
+jQuery(function($) {
+
+  // when the #country field changes
+  $("#profile_country_id").change(function() {
+    // make a POST call and replace the content
+    var country = $('select#profile_country_id :selected').val();
+    if(country == "") country="0";
+    jQuery.get('/home/update_state_select/'+country, function(data){
+        $("#addressStates").html(data);
+    })
+    return false;
+  });
+
+})
+
+</script>
+  
